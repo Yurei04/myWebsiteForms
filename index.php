@@ -1,156 +1,258 @@
+<?php
+// 1. Introduce Yourself
+$name = "James Yuri R. Avila";
+$age = 20;
+$favColor = "blue";
+$intro = "Hi, I’m $name, I am $age years old, and my favorite color is $favColor.";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Health Calculators</title>
+  <title>PHP Activity with Forms</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Health Calculators</h1>
 
-  <!-- BMR Calculator -->
+  <h1>PHP Activity (Form Version)</h1>
+
+  <!-- 1. Introduce Yourself -->
   <section>
-    <h2>BMR Calculator</h2>
-    <form method="post" action="">
-      <input type="number" name="weight" placeholder="Weight (kg)" required>
-      <input type="number" name="height" placeholder="Height (cm)" required>
-      <input type="number" name="age" placeholder="Age" required>
-      <select name="gender" required>
-        <option value="">Select Gender</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-      </select>
-      <button type="submit" name="bmr_submit">Calculate BMR</button>
+    <h2>1. Introduce Yourself</h2>
+    <p><?php echo $intro; ?></p>
+  </section>
+
+  <!-- 2. Simple Math -->
+  <section>
+    <h2>2. Simple Math</h2>
+    <form method="post">
+      <input type="number" name="a" placeholder="Enter number A" required>
+      <input type="number" name="b" placeholder="Enter number B" required>
+      <button type="submit" name="math_submit">Calculate</button>
     </form>
     <?php
-      if (isset($_POST['bmr_submit'])) {
+      if (isset($_POST['math_submit'])) {
+        $a = $_POST['a'];
+        $b = $_POST['b'];
+        echo "<ul>
+          <li>Sum: " . ($a + $b) . "</li>
+          <li>Difference: " . ($a - $b) . "</li>
+          <li>Product: " . ($a * $b) . "</li>
+          <li>Quotient: " . ($b != 0 ? $a / $b : 'Cannot divide by zero') . "</li>
+        </ul>";
+      }
+    ?>
+  </section>
+
+  <!-- 3. Area and Perimeter of Rectangle -->
+  <section>
+    <h2>3. Area and Perimeter of Rectangle</h2>
+    <form method="post">
+      <input type="number" name="length" placeholder="Length" required>
+      <input type="number" name="width" placeholder="Width" required>
+      <button type="submit" name="rect_submit">Calculate</button>
+    </form>
+    <?php
+      if (isset($_POST['rect_submit'])) {
+        $length = $_POST['length'];
+        $width = $_POST['width'];
+        $area = $length * $width;
+        $perimeter = 2 * ($length + $width);
+        echo "<ul>
+          <li>Area: $area</li>
+          <li>Perimeter: $perimeter</li>
+        </ul>";
+      }
+    ?>
+  </section>
+
+  <!-- 4. Temperature Converter -->
+  <section>
+    <h2>4. Temperature Converter (Celsius → Fahrenheit)</h2>
+    <form method="post">
+      <input type="number" name="celsius" placeholder="Celsius" required>
+      <button type="submit" name="temp_submit">Convert</button>
+    </form>
+    <?php
+      if (isset($_POST['temp_submit'])) {
+        $celsius = $_POST['celsius'];
+        $fahrenheit = ($celsius * 9 / 5) + 32;
+        echo "<p>$celsius °C = $fahrenheit °F</p>";
+      }
+    ?>
+  </section>
+
+  <!-- 5. Swapping Variables -->
+  <section>
+    <h2>5. Swapping Variables</h2>
+    <form method="post">
+      <input type="number" name="x" placeholder="Value of X" required>
+      <input type="number" name="y" placeholder="Value of Y" required>
+      <button type="submit" name="swap_submit">Swap</button>
+    </form>
+    <?php
+      if (isset($_POST['swap_submit'])) {
+        $x = $_POST['x'];
+        $y = $_POST['y'];
+        $temp = $x;
+        $x = $y;
+        $y = $temp;
+        echo "<ul>
+          <li>After Swap - X: $x</li>
+          <li>After Swap - Y: $y</li>
+        </ul>";
+      }
+    ?>
+  </section>
+
+  <!-- 6. Salary Calculator -->
+  <section>
+    <h2>6. Salary Calculator</h2>
+    <form method="post">
+      <input type="number" name="basic" placeholder="Basic Salary" required>
+      <input type="number" name="allowance" placeholder="Allowance" required>
+      <input type="number" name="deduction" placeholder="Deduction" required>
+      <button type="submit" name="salary_submit">Calculate Net Salary</button>
+    </form>
+    <?php
+      if (isset($_POST['salary_submit'])) {
+        $basic = $_POST['basic'];
+        $allowance = $_POST['allowance'];
+        $deduction = $_POST['deduction'];
+        $net = $basic + $allowance - $deduction;
+        echo "<p>Net Salary: ₱" . number_format($net, 2) . "</p>";
+      }
+    ?>
+  </section>
+
+  <!-- 7. BMI Calculator -->
+  <section>
+    <h2>7. BMI Calculator</h2>
+    <form method="post">
+      <input type="number" step="0.1" name="weight" placeholder="Weight (kg)" required>
+      <input type="number" step="0.01" name="height" placeholder="Height (m)" required>
+      <button type="submit" name="bmi_submit">Calculate</button>
+    </form>
+    <?php
+      if (isset($_POST['bmi_submit'])) {
         $weight = $_POST['weight'];
         $height = $_POST['height'];
-        $age = $_POST['age'];
-        $gender = $_POST['gender'];
-        if ($gender == "male") {
-          $bmr = 88.36 + (13.4 * $weight) + (4.8 * $height) - (5.7 * $age);
-        } else {
-          $bmr = 447.6 + (9.2 * $weight) + (3.1 * $height) - (4.3 * $age);
-        }
-        echo "<p>Your BMR is " . round($bmr, 2) . " kcal/day</p>";
+        $bmi = $weight / ($height * $height);
+        echo "<p>Your BMI is " . round($bmi, 2) . "</p>";
       }
     ?>
   </section>
 
-  <!-- Ideal Weight Calculator -->
+  <!-- 8. String Manipulation -->
   <section>
-    <h2>Ideal Weight Calculator</h2>
-    <form method="post" action="">
-      <input type="number" name="height2" placeholder="Height (cm)" required>
-      <select name="gender2" required>
-        <option value="">Select Gender</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-      </select>
-      <button type="submit" name="ideal_submit">Calculate Ideal Weight</button>
+    <h2>8. String Manipulation</h2>
+    <form method="post">
+      <input type="text" name="sentence" placeholder="Enter a sentence" required>
+      <button type="submit" name="string_submit">Analyze</button>
     </form>
     <?php
-      if (isset($_POST['ideal_submit'])) {
-        $height = $_POST['height2'];
-        $gender = $_POST['gender2'];
-        if ($gender == "male") {
-          $ideal = $height - 100 - (($height - 150) / 4);
-        } else {
-          $ideal = $height - 100 - (($height - 150) / 2.5);
-        }
-        echo "<p>Your ideal weight is " . round($ideal, 2) . " kg</p>";
+      if (isset($_POST['string_submit'])) {
+        $sentence = $_POST['sentence'];
+        $charCount = strlen($sentence);
+        $wordCount = str_word_count($sentence);
+        $upper = strtoupper($sentence);
+        $lower = strtolower($sentence);
+        echo "<ul>
+          <li>Characters: $charCount</li>
+          <li>Words: $wordCount</li>
+          <li>Uppercase: $upper</li>
+          <li>Lowercase: $lower</li>
+        </ul>";
       }
     ?>
   </section>
 
-  <!-- Steps to Calories -->
+  <!-- 9. Bank Account Simulation -->
   <section>
-    <h2>Steps to Calories Converter</h2>
-    <form method="post" action="">
-      <input type="number" name="steps" placeholder="Steps walked" required>
-      <input type="number" name="weight3" placeholder="Weight (kg)" required>
-      <button type="submit" name="steps_submit">Convert</button>
+    <h2>9. Bank Account Simulation</h2>
+    <form method="post">
+      <input type="number" name="balance" placeholder="Current Balance" required>
+      <input type="number" name="deposit" placeholder="Deposit" required>
+      <input type="number" name="withdraw" placeholder="Withdraw" required>
+      <button type="submit" name="bank_submit">Compute</button>
     </form>
     <?php
-      if (isset($_POST['steps_submit'])) {
-        $steps = $_POST['steps'];
-        $weight = $_POST['weight3'];
-        $calories = $steps * 0.04 * ($weight / 70);
-        echo "<p>You burned approximately " . round($calories, 2) . " calories.</p>";
+      if (isset($_POST['bank_submit'])) {
+        $balance = $_POST['balance'];
+        $deposit = $_POST['deposit'];
+        $withdraw = $_POST['withdraw'];
+        $new_balance = $balance + $deposit - $withdraw;
+        echo "<p>New Balance: ₱" . number_format($new_balance, 2) . "</p>";
       }
     ?>
   </section>
 
-  <!-- Body Fat Percentage -->
+  <!-- 10. Simple Grading System -->
   <section>
-    <h2>Body Fat Percentage Estimator</h2>
-    <form method="post" action="">
-      <input type="number" name="waist" placeholder="Waist (cm)" required>
-      <input type="number" name="neck" placeholder="Neck (cm)" required>
-      <input type="number" name="height3" placeholder="Height (cm)" required>
-      <select name="gender3" required>
-        <option value="">Select Gender</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-      </select>
-      <button type="submit" name="bodyfat_submit">Estimate</button>
+    <h2>10. Simple Grading System</h2>
+    <form method="post">
+      <input type="number" name="math" placeholder="Math Grade" required>
+      <input type="number" name="english" placeholder="English Grade" required>
+      <input type="number" name="science" placeholder="Science Grade" required>
+      <button type="submit" name="grade_submit">Calculate</button>
     </form>
     <?php
-      if (isset($_POST['bodyfat_submit'])) {
-        $waist = $_POST['waist'];
-        $neck = $_POST['neck'];
-        $height = $_POST['height3'];
-        $gender = $_POST['gender3'];
-
-        if ($gender == "male") {
-          $bodyFat = 495 / (1.0324 - 0.19077 * log10($waist - $neck) + 0.15456 * log10($height)) - 450;
-        } else {
-          $bodyFat = 495 / (1.29579 - 0.35004 * log10($waist + 0 - $neck) + 0.22100 * log10($height)) - 450;
-        }
-        echo "<p>Your estimated body fat percentage is " . round($bodyFat, 2) . "%</p>";
+      if (isset($_POST['grade_submit'])) {
+        $math = $_POST['math'];
+        $english = $_POST['english'];
+        $science = $_POST['science'];
+        $average = ($math + $english + $science) / 3;
+        if ($average >= 90) $grade = "A";
+        elseif ($average >= 80) $grade = "B";
+        elseif ($average >= 70) $grade = "C";
+        else $grade = "F";
+        echo "<ul>
+          <li>Average: " . number_format($average, 2) . "</li>
+          <li>Grade: $grade</li>
+        </ul>";
       }
     ?>
   </section>
 
-  <!-- TDEE Calculator -->
+  <!-- 11. Currency Converter -->
   <section>
-    <h2>TDEE Calculator</h2>
-    <form method="post" action="">
-      <input type="number" name="weight4" placeholder="Weight (kg)" required>
-      <input type="number" name="height4" placeholder="Height (cm)" required>
-      <input type="number" name="age4" placeholder="Age" required>
-      <select name="gender4" required>
-        <option value="">Select Gender</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-      </select>
-      <select name="activity" required>
-        <option value="">Select Activity Level</option>
-        <option value="1.2">Sedentary</option>
-        <option value="1.375">Lightly Active</option>
-        <option value="1.55">Moderately Active</option>
-        <option value="1.725">Very Active</option>
-        <option value="1.9">Extra Active</option>
-      </select>
-      <button type="submit" name="tdee_submit">Calculate TDEE</button>
+    <h2>11. Currency Converter (PHP → USD, EUR, JPY)</h2>
+    <form method="post">
+      <input type="number" name="phpAmount" placeholder="Amount in PHP" required>
+      <button type="submit" name="currency_submit">Convert</button>
     </form>
     <?php
-      if (isset($_POST['tdee_submit'])) {
-        $weight = $_POST['weight4'];
-        $height = $_POST['height4'];
-        $age = $_POST['age4'];
-        $gender = $_POST['gender4'];
-        $activity = $_POST['activity'];
+      if (isset($_POST['currency_submit'])) {
+        $phpAmount = $_POST['phpAmount'];
+        $usd = $phpAmount * 0.018;
+        $eur = $phpAmount * 0.016;
+        $jpy = $phpAmount * 2.66;
+        echo "<ul>
+          <li>₱$phpAmount = $" . number_format($usd, 2) . " USD</li>
+          <li>₱$phpAmount = €" . number_format($eur, 2) . " EUR</li>
+          <li>₱$phpAmount = ¥" . number_format($jpy, 2) . " JPY</li>
+        </ul>";
+      }
+    ?>
+  </section>
 
-        if ($gender == "male") {
-          $bmr = 88.36 + (13.4 * $weight) + (4.8 * $height) - (5.7 * $age);
-        } else {
-          $bmr = 447.6 + (9.2 * $weight) + (3.1 * $height) - (4.3 * $age);
-        }
-
-        $tdee = $bmr * $activity;
-        echo "<p>Your TDEE is approximately " . round($tdee, 2) . " kcal/day</p>";
+  <!-- 12. Travel Cost Estimator -->
+  <section>
+    <h2>12. Travel Cost Estimator</h2>
+    <form method="post">
+      <input type="number" name="distance" placeholder="Distance (km)" required>
+      <input type="number" step="0.1" name="fuel" placeholder="Fuel Efficiency (km/l)" required>
+      <input type="number" step="0.1" name="price" placeholder="Fuel Price (₱/L)" required>
+      <button type="submit" name="travel_submit">Estimate Cost</button>
+    </form>
+    <?php
+      if (isset($_POST['travel_submit'])) {
+        $distance = $_POST['distance'];
+        $fuel = $_POST['fuel'];
+        $price = $_POST['price'];
+        $cost = ($distance / $fuel) * $price;
+        echo "<p>Estimated Travel Cost: ₱" . number_format($cost, 2) . "</p>";
       }
     ?>
   </section>
