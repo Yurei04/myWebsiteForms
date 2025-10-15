@@ -1,0 +1,62 @@
+/* Dark Mode with Blue Accent */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #0d1117;
+  color: #e6edf3;
+  margin: 40px;
+  line-height: 1.6;
+}
+
+h1 {
+  text-align: center;
+  color: #007acc;
+  margin-bottom: 40px;
+}
+
+section {
+  background: #161b22;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 122, 204, 0.3);
+}
+
+h2 {
+  color: #58a6ff;
+  border-left: 4px solid #007acc;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: #1f2937;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin: 6px 0;
+}
+
+p {
+  background: #1f2937;
+  padding: 10px 14px;
+  border-radius: 6px;
+}
+
+a {
+  color: #58a6ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
